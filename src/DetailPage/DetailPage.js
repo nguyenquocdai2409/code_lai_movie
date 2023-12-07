@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { https } from "../api/config";
 import { Rate } from "antd";
+import moment from "moment";
 
 export default function DetailPage() {
   let params = useParams();
@@ -35,7 +36,10 @@ export default function DetailPage() {
               style={{ width: "200px", borderRadius: "3%" }}
             />
             <div className="ml-10 space-y-5 text-white">
-              <span>{detail.ngayKhoiChieu}</span> <br></br>
+              <span>
+                {moment(detail.ngayKhoiChieu).format("DD-MM-YYYY ~ hh:mm:ss")}
+              </span>{" "}
+              <br></br>
               <span className="" style={{ fontSize: "20px" }}>
                 {detail.tenPhim}
               </span>{" "}
