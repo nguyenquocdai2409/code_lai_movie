@@ -17,7 +17,7 @@ export default function Header() {
             }}
             className=" btn-theme"
           >
-            Log out
+            Sign out
           </button>
         </>
       );
@@ -30,7 +30,7 @@ export default function Header() {
             }}
             className="btn-theme"
           >
-            Log in
+            Sign in
           </button>
           <button
             onClick={() => {
@@ -38,7 +38,7 @@ export default function Header() {
             }}
             className="btn-theme"
           >
-            Sign in
+            Sign up
           </button>
         </>
       );

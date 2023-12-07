@@ -61,7 +61,7 @@ const SignInPage = () => {
           style={{ fontSize: 30 }}
         >
           <FontAwesomeIcon icon={faUser} />
-          <h2 className=""> Sign In</h2>
+          <h2 className=""> Sign Up</h2>
         </div>
         <Form.Item
           label="Username"

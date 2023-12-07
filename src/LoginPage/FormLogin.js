@@ -67,7 +67,7 @@ const FormLogin = () => {
           style={{ fontSize: 30 }}
         >
           <FontAwesomeIcon icon={faUser} />
-          <h2 className=""> Log In</h2>
+          <h2 className=""> Sign in</h2>
         </div>
         <Form.Item
           label="Username"
@@ -120,7 +120,7 @@ const FormLogin = () => {
           }}
         >
           <Button className="bg-red-500 w-full text-white" htmlType="submit">
-            Log in
+            Sign in
           </Button>
         </Form.Item>
       </Form>
