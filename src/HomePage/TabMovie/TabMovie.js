@@ -36,7 +36,7 @@ export default function TabMovie() {
                 key: index,
                 label: (
                   <div className="w-96 truncate text-left">
-                    <Tooltip title={cumRap.diaChi}>
+                    <Tooltip title={cumRap.diaChi} data={cumRap}>
                       <p className="text-green-500 uppercase">
                         {cumRap.tenCumRap}
                       </p>

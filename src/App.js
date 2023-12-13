@@ -6,6 +6,7 @@ import LoginPage from "./LoginPage/LoginPage";
 import Header from "./Header/Header";
 import SignInPage from "./SignInPage/SignInPage";
 import DetailPage from "./DetailPage/DetailPage";
+import BookingTicket from "./BookingTicket/BookingTicket";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/detail/:idPhim" element={<DetailPage />} />
+          <Route path="/booking/:id" element={<BookingTicket />} />
         </Routes>
       </BrowserRouter>
     </div>

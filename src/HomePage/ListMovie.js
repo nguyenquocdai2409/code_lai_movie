@@ -3,6 +3,7 @@ import { Card } from "antd";
 import { https } from "../api/config";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import BookingTicket from "../BookingTicket/BookingTicket";
 const { Meta } = Card;
 
 export default function ListMovie() {
