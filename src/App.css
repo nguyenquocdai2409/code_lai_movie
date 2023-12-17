@@ -72,12 +72,11 @@
 }
 
 .gheDangChon {
-  background: rgb(109, 238, 109);
+  background: rgb(109, 238, 109) !important;
   border: 3px solid rgb(109, 238, 109);
   color: #000;
-
   cursor: pointer;
   border-radius: 5px;
-  width: 45px;
-  height: 35px;
+  width: 35px !important;
+  height: 35px !important;
 }
