@@ -2,69 +2,75 @@ import React, { useEffect, useState } from "react";
 import { USER_LOGIN } from "../redux/constant/constant";
 import { useSelector } from "react-redux";
 import { https } from "../api/config";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import clsx from "clsx";
+import { message } from "antd";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function BookingTicket() {
   let params = useParams();
-  console.log(params);
+  let navigate = useNavigate();
+  // console.log(params);
   const [thongTinDatVe, setthongTinDatVe] = useState({});
   const [gheDuocChon, setgheDuocChon] = useState([]);
-  console.log(gheDuocChon);
-  useEffect(() => {
+  console.log(">>>>>detail booking", thongTinDatVe, gheDuocChon);
+  //
+
+  const fetchAPI = () => {
     https
       .get(`/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${params.id}`)
       .then((res) => {
-        console.log(res.data.content);
         setthongTinDatVe(res.data.content);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  useEffect(() => {
+    fetchAPI();
   }, []);
-  const handleSelected = (tenGhe) => {
-    console.log(tenGhe);
-    // kiem tra xem ghe da duoc chon hay chua
-    const isSeatSelected = gheDuocChon.includes(tenGhe);
-    // neu ghe da duoc chon, hay loai bo no khoi danh sach
-    if (isSeatSelected) {
-      const updateSeats = gheDuocChon.filter((ghe) => ghe !== tenGhe);
-      setgheDuocChon(updateSeats);
+
+  //===> process booking <===//
+  const handleBooking = async (payload) => {
+    try {
+      const response = await https.post("/api/QuanLyDatVe/DatVe", payload);
+      if (response.status === 200) {
+        message.success("booking successfully!");
+        //** do some thing else here EXAMPLE: navigate to thank you page or home blabla .... */
+
+        setgheDuocChon([]);
+        fetchAPI();
+      }
+    } catch (err) {
+      message.error("booking faild please try again!");
+    }
+  };
+
+  const handleSelected = (chair) => {
+    const findChair = gheDuocChon.find((ele) => ele.maGhe === chair.maGhe);
+    console.log(findChair);
+    if (findChair) {
+      const filterData = gheDuocChon.filter((ele) => ele.maGhe !== chair.maGhe);
+      setgheDuocChon(filterData);
     } else {
-      //neu ghe chua duoc chon, hay them no vao danh sach
-      setgheDuocChon([...gheDuocChon, tenGhe]);
+      setgheDuocChon([...gheDuocChon, chair]);
     }
   };
   let renderGhe = () => {
     return thongTinDatVe.danhSachGhe?.map((ghe, index) => {
-      let cssGheVip = "";
-      let disabled = false;
-      //
-      let cssGheDuocChon = "";
-      //
-      let cssGheDangChon;
-      if (ghe.loaiGhe == "Vip") {
-        cssGheVip = "gheVip";
-      }
-      if (ghe.daDat && ghe.loaiGhe == "Thuong") {
-        cssGheDuocChon = "gheDuocChon";
-        disabled = true;
-      }
-      let indexGheDuocChon = gheDuocChon.findIndex((item) => {
-        return item == ghe.tenGhe;
-      });
-      // console.log(indexGheDuocChon);
-      if (indexGheDuocChon !== -1) {
-        cssGheDangChon = "gheDangChon";
-      } else {
-        cssGheDangChon = "";
-      }
+      console.log(ghe);
       return (
         <button
           onClick={() => {
-            handleSelected(ghe.tenGhe);
+            handleSelected(ghe);
           }}
           key={index}
-          className={`ghe ${cssGheVip} ${cssGheDuocChon} ${cssGheDangChon}`}
+          className={clsx("ghe", {
+            gheVip: ghe.loaiGhe === "Vip",
+            gheDuocChon: ghe.daDat,
+            gheDangChon: gheDuocChon.some((ele) => ele.maGhe === ghe.maGhe),
+          })}
         >
           {" "}
           {ghe.tenGhe}{" "}
@@ -99,13 +105,14 @@ export default function BookingTicket() {
           </div>
         </div>
         <div className=" col-span-4 space-y-5">
-          <h3 className="text-center text-green-400 text-2xl">
+          <h3 className="text-center text-green-500 text-2xl">
             {" "}
             {gheDuocChon
               .reduce((tongTien, ghe, index) => {
                 return (tongTien += ghe.giaVe);
               }, 0)
-              .toLocaleString()}
+              .toLocaleString()}{" "}
+            đồng
           </h3>
           <hr />
           <div className="flex justify-between">
@@ -149,18 +156,15 @@ export default function BookingTicket() {
           <div className="flex justify-between">
             <h3 className="text-xl">Chọn: </h3>
             <div className="text-xl">
-              {[...gheDuocChon].map((item, index) => {
-                const tenGhe = item;
-                const isSeatSelected = gheDuocChon.includes(tenGhe);
-                const cssGheDangChon = isSeatSelected ? "gheDangChon" : "";
+              {gheDuocChon.map((item, index) => {
                 return (
                   <span
                     style={{ fontSize: "20px" }}
                     key={index}
-                    className={`ghe ${cssGheDangChon} `}
+                    className={`ghe gheDangChon `}
                   >
                     {" "}
-                    Ghế {tenGhe} ,{" "}
+                    Ghế {item.tenGhe}{" "}
                   </span>
                 );
               })}
@@ -174,6 +178,24 @@ export default function BookingTicket() {
           <div>
             <i>Phone : </i>
             {user.soDT}
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                const payload = {
+                  maLichChieu: thongTinDatVe?.thongTinPhim?.maLichChieu,
+                  danhSachVe: gheDuocChon.map((chair) => ({
+                    maGhe: chair.maGhe,
+                    giaVe: chair.giaVe,
+                  })),
+                };
+
+                handleBooking(payload);
+              }}
+              className="bg-red-500 hover:bg-red-900 text-white py-5 w-full"
+            >
+              ĐẶT VÉ
+            </button>
           </div>
         </div>
       </div>
