@@ -9,13 +9,16 @@ export default function Header() {
     if (user) {
       return (
         <>
-          <span className=" font-medium text-red-500">{user.hoTen}</span>
+          <span
+          style={{cursor: 'pointer'}}
+          onClick={() => { navigate('/account') }}
+          className=" font-medium text-dark hover:text-orange-500">{user.hoTen}</span>
           <button
             onClick={() => {
               window.location.href = "/login";
               localStorage.removeItem("USER_LOGIN");
             }}
-            className=" btn-theme"
+            className=" btn-theme hover:text-orange-500"
           >
             Sign out
           </button>

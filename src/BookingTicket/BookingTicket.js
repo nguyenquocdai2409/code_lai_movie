@@ -59,7 +59,7 @@ export default function BookingTicket() {
   };
   let renderGhe = () => {
     return thongTinDatVe.danhSachGhe?.map((ghe, index) => {
-      console.log(ghe);
+      // console.log(ghe);
       return (
         <button
           onClick={() => {
