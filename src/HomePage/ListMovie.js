@@ -4,20 +4,32 @@ import { https } from "../api/config";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import BookingTicket from "../BookingTicket/BookingTicket";
+import { TURN_OFF, TURN_ON } from "../redux/constant/Spinner";
+import { useDispatch } from "react-redux";
 const { Meta } = Card;
 
 export default function ListMovie() {
   const [movieArr, setmovieArr] = useState([]);
   let navigate = useNavigate();
+  let dispatch = useDispatch();
   useEffect(() => {
+    dispatch({
+      type: TURN_ON,
+    });
     https
       .get("/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP09")
       .then((res) => {
         console.log(res);
         setmovieArr(res.data.content);
+        dispatch({
+          type: TURN_OFF,
+        });
       })
       .catch((err) => {
         console.log(err);
+        dispatch({
+          type: TURN_OFF,
+        });
       });
   }, []);
   return (
