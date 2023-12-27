@@ -9,7 +9,6 @@ import { ToastContainer, toast } from "react-toastify";
 
 export default function BookingTicket() {
   let params = useParams();
-  let navigate = useNavigate();
   // console.log(params);
   const [thongTinDatVe, setthongTinDatVe] = useState({});
   const [gheDuocChon, setgheDuocChon] = useState([]);

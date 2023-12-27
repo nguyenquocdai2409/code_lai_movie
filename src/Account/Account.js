@@ -72,19 +72,28 @@ export default function Account() {
                         Thời lượng : {item.thoiLuongPhim} , Giá vé :{" "}
                         {item.giaVe} VND{" "}
                       </p>
-                      {item.danhSachGhe.map((dsGhe, index) => {
-                        return (
-                          <>
-                            <div key={index}>
-                              <p className="text-green-500">
-                                {dsGhe.tenHeThongRap}
-                              </p>
-                              <p>{dsGhe.tenCumRap}</p>
-                              <p>Ghế số: {dsGhe.tenGhe},</p>
-                            </div>
-                          </>
-                        );
-                      })}
+                      <div>
+                        <p className="text-green-500">
+                          {item &&
+                            Array.isArray(item?.danhSachGhe) &&
+                            item?.danhSachGhe[0]?.tenHeThongRap}
+                        </p>
+                        <p>
+                          {item &&
+                            Array.isArray(item?.danhSachGhe) &&
+                            item?.danhSachGhe[0]?.tenCumRap}
+                        </p>
+                      </div>
+                      <div key={index}>
+                        <p>
+                          Ghế số:{" "}
+                          {item &&
+                            Array.isArray(item.danhSachGhe) &&
+                            item?.danhSachGhe?.map(
+                              (dsGhe) => dsGhe?.tenGhe + ", ",
+                            )}
+                        </p>
+                      </div>
                     </div>
                   </>
                 );
