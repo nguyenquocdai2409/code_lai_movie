@@ -18,22 +18,13 @@ export default function BookingTicket() {
   //
 
   const fetchAPI = () => {
-    dispatch({
-      type: TURN_ON,
-    });
     https
       .get(`/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${params.id}`)
       .then((res) => {
         setthongTinDatVe(res.data.content);
-        dispatch({
-          type: TURN_OFF,
-        });
       })
       .catch((err) => {
         console.log(err);
-        dispatch({
-          type: TURN_OFF,
-        });
       });
   };
 
