@@ -8,9 +8,15 @@ import bgLogin from "./bgLogin.jpg";
 import { useNavigate } from "react-router-dom";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
+import { TURN_OFF, TURN_ON } from "../redux/constant/Spinner";
 const SignInPage = () => {
   let navigate = useNavigate();
+  let dispatch = useDispatch();
   const onFinish = (values) => {
+    dispatch({
+      type: TURN_ON,
+    });
     console.log("Success:", values);
     https
       .post("/api/QuanLyNguoiDung/DangKy", values)
@@ -18,10 +24,16 @@ const SignInPage = () => {
         console.log(res);
         message.success("Đăng Ký Thành Công");
         navigate("/login");
+        dispatch({
+          type: TURN_OFF,
+        });
       })
       .catch((err) => {
         console.log(err);
         message.error("Tên Tài Khoản Đã Tồn Tại");
+        dispatch({
+          type: TURN_OFF,
+        });
       });
   };
   const onFinishFailed = (errorInfo) => {
