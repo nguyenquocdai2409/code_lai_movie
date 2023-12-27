@@ -7,10 +7,11 @@ import { useNavigate } from "react-router-dom";
 import bgLogin from "./bgLogin.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faUser } from "@fortawesome/free-solid-svg-icons";
+import { loginAction } from "../redux/action/user";
 const FormLogin = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
-  const onFinish = (values) => {
+  const onFinishv2 = (values) => {
     console.log("Success:", values);
     https
       .post("/api/QuanLyNguoiDung/DangNhap", values)
@@ -29,6 +30,9 @@ const FormLogin = () => {
         console.log(err);
         message.error("đăng nhập thất bại");
       });
+  };
+  const onFinish = (values) => {
+    dispatch(loginAction(values, navigate));
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
