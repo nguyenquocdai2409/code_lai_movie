@@ -4,13 +4,26 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { combineReducers, createStore } from "redux";
+import { combineReducers } from "@reduxjs/toolkit";
 import { reducer } from "./redux/reducer/reducer";
-
+import { spinnerReducer } from "./redux/reducer/Spinner";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 const root = ReactDOM.createRoot(document.getElementById("root"));
-let store = createStore(
-  combineReducers({ reducer }),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+let rootReducer = combineReducers({
+  reducer,
+  spinnerReducer,
+});
+
+// let store = createStore(
+//   combineReducers({ reducer, spinnerReducer }),
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
+const store = createStore(
+  rootReducer,
+  /* preloadedState, */ composeEnhancers(applyMiddleware(thunk))
 );
 root.render(
   <Provider store={store}>
