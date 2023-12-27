@@ -11,7 +11,6 @@ import { TURN_OFF, TURN_ON } from "../redux/constant/Spinner";
 export default function BookingTicket() {
   let dispatch = useDispatch();
   let params = useParams();
-  let navigate = useNavigate();
   // console.log(params);
   const [thongTinDatVe, setthongTinDatVe] = useState({});
   const [gheDuocChon, setgheDuocChon] = useState([]);
