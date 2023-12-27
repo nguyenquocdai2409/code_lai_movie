@@ -7,12 +7,14 @@ import SignInPage from "./SignInPage/SignInPage";
 import DetailPage from "./DetailPage/DetailPage";
 import BookingTicket from "./BookingTicket/BookingTicket";
 import Account from "./Account/Account";
+import Spinner from "./Spinner/Spinner";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Header />
+        <Spinner />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />

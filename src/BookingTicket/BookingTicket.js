@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { USER_LOGIN } from "../redux/constant/constant";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { https } from "../api/config";
 import { useNavigate, useParams } from "react-router-dom";
 import clsx from "clsx";
 import { message } from "antd";
 import { ToastContainer, toast } from "react-toastify";
+import { TURN_OFF, TURN_ON } from "../redux/constant/Spinner";
 
 export default function BookingTicket() {
+  let dispatch = useDispatch();
   let params = useParams();
   // console.log(params);
   const [thongTinDatVe, setthongTinDatVe] = useState({});
@@ -16,13 +18,22 @@ export default function BookingTicket() {
   //
 
   const fetchAPI = () => {
+    dispatch({
+      type: TURN_ON,
+    });
     https
       .get(`/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${params.id}`)
       .then((res) => {
         setthongTinDatVe(res.data.content);
+        dispatch({
+          type: TURN_OFF,
+        });
       })
       .catch((err) => {
         console.log(err);
+        dispatch({
+          type: TURN_OFF,
+        });
       });
   };
 
