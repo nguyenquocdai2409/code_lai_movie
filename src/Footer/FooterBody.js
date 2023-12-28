@@ -3,6 +3,9 @@ import imgLogo from "./pic1.jpg";
 import imgLogo2 from "./pic2.png";
 import imgApple from "./apple.png";
 import imgAndroid from "./android.png";
+import imgfb from "./fb.png";
+import imgZalo from "./zalo.png";
+import imgCgv from "./cgv.png";
 
 export default function FooterBody() {
   return (
@@ -34,7 +37,22 @@ export default function FooterBody() {
             <br />
             <a>Chính sách bảo mật</a>
           </div>
-          <h6>Đối Tác</h6>
+          <div>
+            <h6>Đối Tác</h6>
+            <a target="_blank" href="https://www.cgv.vn/" rel="noreferrer">
+              <img
+                style={{
+                  width: "30px",
+                  height: "30",
+                  borderRadius: "50%",
+                }}
+                src={imgCgv}
+                alt="Cgv"
+                width="40"
+              />
+            </a>
+          </div>
+
           <div>
             <h6>MOBILE APP</h6>
             <a
@@ -52,7 +70,23 @@ export default function FooterBody() {
               <img src={imgAndroid} alt="android" width="40" />
             </a>
           </div>
-          <h6>SOCIAL</h6>
+          <div>
+            <h6>SOCIAL</h6>
+            <a
+              target="_blank"
+              href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
+              rel="noreferrer"
+            >
+              <img src={imgZalo} alt="zalo" width="40" />
+            </a>
+            <a
+              target="_blank"
+              href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
+              rel="noreferrer"
+            >
+              <img src={imgfb} alt="facebook" width="40" />
+            </a>
+          </div>
         </div>
       </div>
       <hr />
