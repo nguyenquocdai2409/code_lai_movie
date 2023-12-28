@@ -13,7 +13,7 @@ export default function FooterHeader() {
         height: "600px",
         padding: "120px 0 80px 0",
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
     >
       <div
@@ -29,15 +29,19 @@ export default function FooterHeader() {
         >
           <div className="flex box-border ">
             <div className="text-white space-y-10 ">
-              <p>Ứng dụng tiện lợi dành cho</p>
-              <p>người yêu điện ảnh</p>
-              <p>
-                Không chỉ đặt vé, bạn còn có thể bình luận phim, chấm điểm rạp
-                và đổi quà hấp dẫn
+              <p className=" text-4xl mb-8">
+                Ứng dụng tiện lợi dành cho người yêu điện ảnh
               </p>
-              <a
+              <br />
 
+              <p className="text-2xl mb-8 ">
+                Không chỉ đặt vé, bạn còn có thể bình luận phim, chấm điểm rạp
+                và đổi quà hấp dẫn.
+              </p>
+              <br />
+              <a
                 style={{
+                  font: "medium",
                   backgroundColor: "#fb4226",
                   padding: "8px 32px",
                   fontWeight: "700",
@@ -67,21 +71,63 @@ export default function FooterHeader() {
                 </a>{" "}
               </p>
             </div>
-            <div style={{padding: "0",position: "relative" }}>
-                <img style={{height: "auto", display: "block", padding: "0 28%",position: "relative", maxWidth: "100%"}} src={imgPhone} alt="phone" />
-                <div style={{top: 0, left: 0,width: "100%", display: "block", padding: "1.5% 29.2% 0 29.2%", position: "absolute", borderRadius: "20px"}}>
-                  <div>
-                    <div style={{
+            <div style={{ padding: "0", position: "relative" }}>
+              <img
+                style={{
+                  top: 0,
+                  left: 0,
+                  display: "block",
+                  padding: "1.5% 29.2% 0 29.2%",
+                  position: "relative",
+                  width: "100%",
+                  borderRadius: "20px",
+                }}
+                src={imgPhone}
+                alt="phone"
+              />
+              <div
+                style={{
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  display: "block",
+                  padding: "1.5% 29.2% 0 29.2%",
+                  position: "absolute",
+                  borderRadius: "20px",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
                       opacity: 0,
                       transition: "opacity 200ms cubic-bezier(0.4,0,0.2,1) 0ms",
-                    }}>
-                      <div style={{margin: 0, display: "block", padding:0, overflow: "hidden", position: "relative", borderRadius: "20px" }} >
-                            <img style={{display: "block", width: "100%", border: "0px", verticalAlign: "middle", overflow: "hidden"}} src={imgBanner} alt="banner"/>
-                      </div>
+                    }}
+                  >
+                    <div
+                      style={{
+                        margin: 0,
+                        display: "block",
+                        padding: 0,
+                        overflow: "hidden",
+                        position: "relative",
+                        borderRadius: "20px",
+                      }}
+                    >
+                      <img
+                        style={{
+                          display: "block",
+                          width: "100%",
+                          border: "0px",
+                          verticalAlign: "middle",
+                          overflow: "hidden",
+                        }}
+                        src={imgBanner}
+                        alt="banner"
+                      />
                     </div>
                   </div>
-
                 </div>
+              </div>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ import ListMovie from "./ListMovie";
 import TabMovie from "./TabMovie/TabMovie";
 import Banner from "../Banner/Banner";
 import FooterHeader from "../Footer/FooterHeader";
+import FooterBody from "../Footer/FooterBody";
 
 export default function HomePage() {
   return (
@@ -10,7 +11,8 @@ export default function HomePage() {
       <Banner />
       <ListMovie />
       <TabMovie />
-      <FooterHeader/>
+      <FooterHeader />
+      <FooterBody />
     </div>
   );
 }

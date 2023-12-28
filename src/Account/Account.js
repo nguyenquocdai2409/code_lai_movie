@@ -39,7 +39,9 @@ export default function Account() {
           marginRight: "auto",
         }}
       >
-        <span>Lịch Sử Đặt Vé</span>
+        <span className="text-center fontSize:600 text-red-600 ">
+          Lịch Sử Đặt Vé
+        </span>
         <hr />
         <div>
           <div
@@ -90,7 +92,7 @@ export default function Account() {
                           {item &&
                             Array.isArray(item.danhSachGhe) &&
                             item?.danhSachGhe?.map(
-                              (dsGhe) => dsGhe?.tenGhe + ", ",
+                              (dsGhe) => dsGhe?.tenGhe + ", "
                             )}
                         </p>
                       </div>
